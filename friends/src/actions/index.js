@@ -3,7 +3,7 @@ import axios from 'axios';
 export const RETRIEVE_FRIENDS = 'RETRIEVE_FRIENDS';
 export const ADD_FRIEND = 'ADD_FRIEND';
 
-export const retrieveFriends = (friends) => {
+export const retrieveFriends = () => {
   const apiUrl = 'http://localhost:5000/friends';
   const retrieveFriends = axios.get(apiUrl);
 
@@ -18,4 +18,4 @@ export const addFriend = (friend) => {
     type: ADD_FRIEND,
     payload: friend
   };
-}
+};

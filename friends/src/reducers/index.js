@@ -1,6 +1,7 @@
 import { RETRIEVE_FRIENDS, ADD_FRIEND } from '../actions';
+import { combineReducers } from 'redux';
 
-export default (friends = [], action) => {
+const friendsReducer = (friends = [], action) => {
   switch(action.type) {
     case RETRIEVE_FRIENDS:
       return action.payload.data;
@@ -8,5 +9,13 @@ export default (friends = [], action) => {
       return friends.concat(action.payload);
     default: 
       return friends;
-  };
+  }
 };
+
+
+const rootReduer = combineReducers({
+  friends: friendsReducer
+});
+
+export default rootReduer;
+  
