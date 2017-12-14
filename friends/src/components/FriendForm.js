@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { connect } from 'react - redux'
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { addFriend } from '../actions';
 
 class FriendForm extends Component {
@@ -13,48 +14,53 @@ class FriendForm extends Component {
     };
 
     this.addFriend = this.addFriend.bind(this);
-    this.updateFriend = this.updateFriend.bind(this);
+    this.updateFriendInfo = this.updateFriendInfo.bind(this);
+  }
+
+  updateFriendInfo(event) {
+    event.preventDefault();
+    this.setState({
+      name: event.target.value
+    })
   }
 
   addFriend(event) {
     event.preventDefault();
-    this.props.addFriend({
-      name: this.state.name,
-      age: this.state.age,
-      email: this.state.email
+      this.props.addFriend({
+      name: this.state.name
     });
     this.setState({
-      name: '',
-      age: 0,
-      email:''
-    });
-  }
-
-  updateFriend(event) {
-    this.setState({
-      name: event.target.value
+      name: ''
     });
   }
 
   render() {
     return (
       <div className="FriendForm">
-        <form onSumbit={this.addFriend}>
-          <input  
-            onChange={this.updateFriend}
-            placeholder="Add Friend"
-            value={this.state.name}
-          />
+        <form onSubmit={this.addFriend}>
+          <input type="text"
+           value={this.state.name}
+           onChange={this.updateFriendInfo} 
+           placeholder="Name"
+           
+           />
         </form>
       </div>
-    );
+    )
   }
 }
 
-const maptStateToProps = (state) => {
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({
+    addFriend: addFriend
+  }, dispatch);
+};
+
+const mapStateToProps = (state) => {
   return {
     friends: state.friends
-  }
-}
+  };
+};
 
-export default connect(maptStateToProps, { addFriend })(FriendForm);
+
+export default connect(mapStateToProps, mapDispatchToProps)(FriendForm);

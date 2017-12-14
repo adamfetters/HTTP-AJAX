@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { retrieveFriends } from '../actions';
-import Friend from './Friend';
+import Friend from '../components/Friend';
 
 class FriendsList extends Component {
   componentDidMount() {
@@ -12,7 +12,7 @@ class FriendsList extends Component {
   render() {
     return (
       <div>
-        <ul>
+        <ul className='friend-list'>
           {this.props.friends.map((friend, index) => <Friend friend={friend} key={friend.name} index={index} />)}
         </ul>
       </div>
