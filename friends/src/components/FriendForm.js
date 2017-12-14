@@ -9,7 +9,7 @@ class FriendForm extends Component {
 
     this.state = {
       name: '',
-      age: 0,
+      age: '',
       email: ''
     };
 
@@ -24,14 +24,26 @@ class FriendForm extends Component {
     })
   }
 
+  formIsValid() {
+    if (this.state.name === '' ) {
+        return false;
+        }
+        return true;
+  }
+
+  
   addFriend(event) {
     event.preventDefault();
+    if (this.formIsValid()) {
       this.props.addFriend({
       name: this.state.name
     });
     this.setState({
       name: ''
     });
+  } else {
+    alert('Please fill out form completely');
+  }
   }
 
   render() {
@@ -39,10 +51,10 @@ class FriendForm extends Component {
       <div className="FriendForm">
         <form onSubmit={this.addFriend}>
           <input type="text"
+           required={true}
            value={this.state.name}
            onChange={this.updateFriendInfo} 
            placeholder="Name"
-           
            />
         </form>
       </div>
