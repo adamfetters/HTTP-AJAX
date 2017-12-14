@@ -20,26 +20,32 @@ class FriendForm extends Component {
   updateFriendInfo(event) {
     event.preventDefault();
     this.setState({
-      name: event.target.value
+      [event.target.name]: event.target.value
     })
   }
 
   formIsValid() {
-    if (this.state.name === '' ) {
+    if (this.state.name === '' ||
+        this.state.age === '' ||
+        this.state.email === '' ) {
         return false;
         }
         return true;
   }
 
   
-  addFriend(event) {
-    event.preventDefault();
+  addFriend() {
+    // event.preventDefault();
     if (this.formIsValid()) {
       this.props.addFriend({
-      name: this.state.name
+      name: this.state.name,
+      age: this.state.age,
+      email: this.state.email
     });
     this.setState({
-      name: ''
+      name: '',
+      age: '',
+      email: ''
     });
   } else {
     alert('Please fill out form completely');
@@ -49,14 +55,27 @@ class FriendForm extends Component {
   render() {
     return (
       <div className="FriendForm">
-        <form onSubmit={this.addFriend}>
-          <input type="text"
-           required={true}
-           value={this.state.name}
-           onChange={this.updateFriendInfo} 
-           placeholder="Name"
-           />
+        <form>
+          <input 
+          name='name'
+          placeholder='Name'
+          value={this.state.name}
+          onChange={this.updateFriendInfo}
+          /> 
+           <input 
+          name='age'
+          placeholder='Age'
+          value={this.state.age}
+          onChange={this.updateFriendInfo}
+          /> 
+           <input 
+          name='email'
+          placeholder='Email'
+          value={this.state.email}
+          onChange={this.updateFriendInfo}
+          /> 
         </form>
+        <button onClick={this.addFriend}>Submit</button>
       </div>
     )
   }
