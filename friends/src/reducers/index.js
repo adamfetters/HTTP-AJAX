@@ -13,9 +13,9 @@ const friendsReducer = (friends = [], action) => {
 };
 
 
-const rootReduer = combineReducers({
+const rootReducer = combineReducers({
   friends: friendsReducer
 });
 
-export default rootReduer;
+export default rootReducer;
   
