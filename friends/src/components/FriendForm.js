@@ -76,6 +76,7 @@ class FriendForm extends Component {
           /> 
         </form>
         <button onClick={this.addFriend}>Submit</button>
+        
       </div>
     )
   }

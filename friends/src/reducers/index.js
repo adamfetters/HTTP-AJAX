@@ -1,4 +1,4 @@
-import { RETRIEVE_FRIENDS, ADD_FRIEND } from '../actions';
+import { RETRIEVE_FRIENDS, ADD_FRIEND, DELETE_FRIEND } from '../actions';
 import { combineReducers } from 'redux';
 
 const friendsReducer = (friends = [], action) => {
@@ -7,6 +7,8 @@ const friendsReducer = (friends = [], action) => {
       return action.payload.data;
     case ADD_FRIEND:
       return friends.concat(action.payload);
+    case DELETE_FRIEND:
+      return friends.filter(({ index }) => index !== action.data);
     default: 
       return friends;
   }
